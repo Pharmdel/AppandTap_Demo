@@ -1,0 +1,198 @@
+/* The live portal renders its filters with select2 (select-type-1/2) and
+   loads jQuery plugins this static clone doesn't. These rules make a plain
+   <select> inside those wrappers look like the rendered select2 control
+   (colours and sizes from custom.css), and fill the few utilities the
+   clone uses that the site's compiled app.css doesn't happen to contain. */
+
+/* select-type-2: date-range filters on the dashboard widgets. */
+.select-type-2 > select {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background-color: transparent;
+    color: #68759A;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: right;
+    padding: 4px 22px 4px 8px;
+    cursor: pointer;
+    box-shadow: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%2368759A'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    background-size: 8px 5px;
+}
+
+.select-type-2 > select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* select-type-1: the Group Owner's "All Pharmacies" filter on the coloured bar. */
+.select-type-1 > select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    min-width: 280px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1em;
+    border: 1px solid #8FD689;
+    border-radius: 0.5rem;
+    padding: 12px 36px 12px 12px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 8px 5px;
+}
+
+.select-type-1 > select option {
+    color: #0059ac;
+}
+
+dialog::backdrop {
+    background: rgb(0 0 0 / 0.6);
+}
+
+/* Utilities the clone uses that the live app.css was never compiled with. */
+.bg-skyBlueClr,
+.hover\:bg-skyBlueClr:hover {
+    background-color: #e2f0f5;
+}
+.text-nhsColor {
+    color: #005eb8;
+}
+.border-slate-50 {
+    border-color: rgb(248 250 252);
+}
+.divide-slate-50 > :not([hidden]) ~ :not([hidden]) {
+    border-color: rgb(248 250 252);
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.last\:mb-0:last-child {
+    margin-bottom: 0;
+}
+.max-h-\[280px\] {
+    max-height: 280px;
+}
+.w-\[460px\] {
+    width: 460px;
+}
+@media (min-width: 640px) {
+    .sm\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+@media (min-width: 768px) {
+    .md\:pt-6 {
+        padding-top: 1.5rem;
+    }
+}
+
+/* Midone "tw" modals: app.js lifts an open modal above everything; the
+   transition utilities on them were never compiled into app.css. */
+.modal {
+    z-index: 10000;
+}
+.transition-\[visibility\2c opacity\] {
+    transition-property: visibility, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+.\[\&\:not\(\.show\)\]\:duration-\[0s\2c 0\.2s\]:not(.show) {
+    transition-duration: 0s, 0.2s;
+}
+.\[\&\:not\(\.show\)\]\:delay-\[0\.2s\2c 0s\]:not(.show) {
+    transition-delay: 0.2s, 0s;
+}
+.\[\&\.show\]\:duration-\[0s\2c 0\.4s\].show {
+    transition-duration: 0s, 0.4s;
+}
+
+/* admin/patient/index.blade.php: the patient list sits flush against the
+   sidebar (pl-0) and the page starts at md:pt-20. */
+.patient-page-offset {
+    margin-top: 1.25rem;
+}
+@media (min-width: 768px) {
+    .patient-page-offset {
+        margin-top: 0;
+        margin-left: -22px;
+        padding-top: 1.5rem;
+        /* Upstream's page is its own .rightpart, which has no bottom padding. */
+        margin-bottom: -2.5rem;
+    }
+    /* Upstream's grid is h-full of a min-h-screen .rightpart, i.e. at least a
+       viewport tall. That leaves the sticky list column room to settle at
+       top-[100px]; sized to its content, the column stayed 19px too high. */
+    .patient-page-offset > .h-full > .grid {
+        min-height: calc(100vh - 81px);
+    }
+}
+
+/* admin/prescription/patient-prescription-order.blade.php: its .rightpart is
+   md:pt-10 with no inner padding (the layout's is md:pt-14). */
+@media (min-width: 768px) {
+    .orders-page-offset {
+        margin-top: -1rem;
+    }
+}
+
+/* DataTables' tailwind renderer and a few responsive columns. */
+.align-middle {
+    vertical-align: middle;
+}
+.col-start-2 {
+    grid-column-start: 2;
+}
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+.justify-self-start {
+    justify-self: start;
+}
+.justify-self-end {
+    justify-self: end;
+}
+.placeholder-gray-500::placeholder {
+    color: rgb(107 114 128);
+}
+@media (min-width: 1536px) {
+    .\32xl\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+    .\32xl\:col-span-9 {
+        grid-column: span 9 / span 9;
+    }
+    .\32xl\:grid-cols-6 {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+
+/* Calendar: select-type-1 inside a white box is the dark-blue service_filter. */
+.service_filter > select {
+    color: #002B56;
+    border-color: #002B56;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23002B56'/%3E%3C/svg%3E");
+}
+.service_filter > select option {
+    color: #002B56;
+}
+
+/* Upstream's .group_owner_tab is a fixed height: calc(100vh - 280px), where
+   the 280px also reserves room for the list's pagination. A short list would
+   show the box's empty background, so it's a max-height here instead. When
+   the Patients list fits on one page its pagination hides itself, so it takes
+   back that ~50px and runs down to the bottom of the screen. */
+#pharmacy-list.group_owner_tab,
+#patient-list.group_owner_tab {
+    height: auto;
+    max-height: calc(100vh - 280px);
+}
+#patient-list.group_owner_tab.single-page {
+    max-height: calc(100vh - 230px);
+}
