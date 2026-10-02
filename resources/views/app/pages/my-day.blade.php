@@ -7,7 +7,7 @@
         @php $status = ['taken' => 'Taken', 'missed' => 'Missed'][$reminder['status_today']] ?? null; @endphp
         <div class="relative {{ $loop->first ? '' : 'mt-[10px]' }} p-[10px] bg-white rounded-[10px] flex items-center">
             <span class="shrink-0 p-2 rounded-full bg-white">
-                <img src="/assets/app/images/medicine_b_icon.svg" class="w-[35px]" alt="">
+                <img src="{{ $reminder['icon'] }}" class="w-[35px]" alt="">
             </span>
             <div class="ml-[10px] min-w-0 pr-16">
                 <p class="text-[15px] font-bold text-black">{{ $reminder['medicine'] }}</p>

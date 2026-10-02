@@ -8,6 +8,13 @@
     $card = 'mt-[10px] bg-white rounded-[5px]';
     // GP times come back as 24h without a leading zero ("9:20", "14:00").
     $gpTime = fn (string $t) => ltrim(\Illuminate\Support\Carbon::createFromFormat('h:i A', $t)->format('G:i'), '0') ?: '0';
+    // Rx Orders status: Issued green, Requested yellow, Rejected blood red.
+    $orderStatusColor = fn (string $status) => match ($status) {
+        'Issued' => 'text-greenColor',
+        'Requested' => 'text-yellow-600',
+        'Rejected' => 'text-[#8B0000]',
+        default => 'text-[#B05030]',
+    };
 @endphp
 
 @section('content')
@@ -16,14 +23,14 @@
         @foreach ($rx['rx_orders'] as $order)
             <div class="{{ $card }} p-[15px]">
                 <div class="flex items-start">
-                    <img src="/assets/app/images/pill4.svg" class="w-5 h-5 shrink-0" alt="">
+                    <img src="{{ $order['icon'] }}" class="w-5 h-5 shrink-0" alt="">
                     <p class="ml-[10px] flex-1 text-[13px] font-bold text-black">{{ $order['medicine'] }}</p>
                 </div>
                 <div class="mt-[6px] pl-[25px] text-[11px]">
                     <p class="text-[#737373]">{{ $order['quantity'] }}</p>
                     <div class="mt-[6px] flex justify-between">
                         <p class="font-bold text-greenColor underline truncate">{{ $order['date_requested'] }}</p>
-                        <p class="text-[#B05030] underline text-right">{{ $order['status'] }}</p>
+                        <p class="{{ $orderStatusColor($order['status']) }} underline text-right">{{ $order['status'] }}</p>
                     </div>
                 </div>
             </div>
@@ -35,7 +42,7 @@
             @php $hasReminder = ! empty($med['reminder_times']); @endphp
             <div class="{{ $card }} pl-[15px] pt-[15px] pb-[15px] pr-[10px]">
                 <div class="flex items-start">
-                    <img src="/assets/app/images/pill4.svg" class="w-5 h-5 shrink-0" alt="">
+                    <img src="{{ $med['icon'] }}" class="w-5 h-5 shrink-0" alt="">
                     <div class="ml-[10px] flex-1 min-w-0">
                         <p class="text-[13px] font-bold text-black">{{ $med['medicine'] }}</p>
                         @if ($hasReminder)

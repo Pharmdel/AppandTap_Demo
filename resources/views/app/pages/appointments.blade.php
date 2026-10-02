@@ -18,6 +18,9 @@
         default => '#0676DD',
     };
     $videoSolid = '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h8A2.5 2.5 0 0 1 16 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-8A2.5 2.5 0 0 1 3 16.5v-9Zm14.5 2.3 3.1-2.2A.9.9 0 0 1 22 8.3v7.4a.9.9 0 0 1-1.4.7l-3.1-2.2V9.8Z"/></svg>';
+    // Each booking shows its own service's icon rather than one generic image.
+    $serviceImages = collect($demo['services'])->pluck('image', 'title');
+    $apptImage = fn (array $a) => $serviceImages[$a['service']] ?? '/assets/app/images/service_image.png';
 @endphp
 
 @section('content')
@@ -37,7 +40,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center min-w-0">
                             <span class="w-5 h-5 shrink-0 rounded-full bg-white overflow-hidden flex items-center justify-center">
-                                <img src="/assets/app/images/service_image.png" class="max-h-5 object-contain" alt="">
+                                <img src="{{ $apptImage($appt) }}" class="w-full h-full object-cover" alt="">
                             </span>
                             <p class="ml-[10px] font-bold text-black line-clamp-3">{{ $appt['service'] }}</p>
                         </div>

@@ -10,6 +10,10 @@
     $seeAll = 'text-[13px] font-bold text-secondaryColor';
     $cardBorder = 'border border-black/[.06]';
     $appointmentWidth = match ($appointments->count()) { 1 => 353, 2 => 171.5, default => 149.34 };
+    // Each booking shows its own service's icon rather than one generic image.
+    // (Looked up from the full catalog, not $services, which is only the first 5.)
+    $serviceImages = collect($demo['services'])->pluck('image', 'title');
+    $apptImage = fn (array $a) => $serviceImages[$a['service']] ?? '/assets/app/images/service_image.png';
 @endphp
 
 @section('content')
@@ -112,7 +116,7 @@
                     <div class="h-full p-[15px] rounded-[15px] {{ $cardBorder }} bg-white flex flex-col justify-between" style="width: {{ $appointmentWidth }}px">
                         <div>
                             <span class="w-[50px] h-[50px] rounded-full bg-white overflow-hidden flex items-center justify-center">
-                                <img src="/assets/app/images/service_image.png" class="max-h-[50px] object-contain" alt="">
+                                <img src="{{ $apptImage($appt) }}" class="w-full h-full object-cover" alt="">
                             </span>
                             <p class="mt-[6px] text-[14px] font-bold text-black line-clamp-2">{{ $appt['service'] }}</p>
                             <div class="mt-[5px] flex">

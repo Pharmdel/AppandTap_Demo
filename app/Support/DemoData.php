@@ -74,21 +74,21 @@ class DemoData
                 'appointment_types' => ['In Pharmacy'],
                 'delivery_types' => [],
                 'book_by' => 'app',
-                'image' => '/assets/app/images/pharmacy_service_image.svg',
+                'image' => '/assets/app/images/services/flu-vaccination.svg',
             ],
             [
                 'id' => 2,
                 'label' => 'Video Call',
                 'label_color' => 'bg-sky text-white',
                 'number' => 2,
-                'title' => 'Pharmacist Consultation',
+                'title' => 'Weight Management Service',
                 'price' => 15,
-                'description' => 'A one-to-one video consultation with our pharmacist to discuss any minor ailment, medication query, or general health concern from the comfort of your home.',
+                'description' => 'A one-to-one video consultation with our pharmacist to set goals and get ongoing advice on reaching and maintaining a healthy weight, from the comfort of your home.',
                 'is_pharmacy_first' => false,
                 'appointment_types' => ['Video Call'],
                 'delivery_types' => [],
                 'book_by' => 'video',
-                'image' => '/assets/app/images/pharmacy_service_image.svg',
+                'image' => '/assets/app/images/services/weight-management-service.svg',
             ],
             [
                 'id' => 3,
@@ -102,7 +102,7 @@ class DemoData
                 'appointment_types' => ['In Pharmacy', 'Video Call'],
                 'delivery_types' => [],
                 'book_by' => 'app',
-                'image' => '/assets/app/images/pharmacy_service_image.svg',
+                'image' => '/assets/app/images/services/sore-throat.svg',
             ],
             [
                 'id' => 4,
@@ -116,7 +116,7 @@ class DemoData
                 'appointment_types' => ['In Pharmacy'],
                 'delivery_types' => [],
                 'book_by' => 'phone',
-                'image' => '/assets/app/images/pharmacy_service_image.svg',
+                'image' => '/assets/app/images/services/blood-pressure.svg',
             ],
             [
                 'id' => 5,
@@ -130,7 +130,7 @@ class DemoData
                 'appointment_types' => ['In Pharmacy'],
                 'delivery_types' => ['Collect in branch'],
                 'book_by' => 'app',
-                'image' => '/assets/app/images/pharmacy_service_image.svg',
+                'image' => '/assets/app/images/services/travel-health.svg',
             ],
             [
                 'id' => 6,
@@ -144,7 +144,7 @@ class DemoData
                 'appointment_types' => ['In Pharmacy', 'Video Call'],
                 'delivery_types' => [],
                 'book_by' => 'app',
-                'image' => '/assets/app/images/pharmacy_service_image.svg',
+                'image' => '/assets/app/images/services/weight-management-support.svg',
             ],
         ];
     }
@@ -154,13 +154,13 @@ class DemoData
         return [
             [
                 'booking_id' => 'BK-10231',
-                'service' => 'Pharmacist Consultation',
+                'service' => 'Weight Management Service',
                 'pharmacy' => 'Wellcare Pharmacy - High Street',
                 'type' => 'Video Call',
                 'date' => '02 Oct 2026',
                 'slot' => '10:30 AM',
                 'amount' => 15,
-                'notes' => 'Query about interaction between ibuprofen and current blood pressure medication.',
+                'notes' => 'Follow-up on progress since the last session and this month\'s weight-loss goals.',
                 'status' => 'Approved',
                 'payment_status' => 'Paid',
                 'is_meeting_active' => true,
@@ -243,16 +243,19 @@ class DemoData
     public static function prescriptions(): array
     {
         return [
+            // Icons: matches each medicine's icon in reminders() where it also
+            // appears there (Amoxicillin/Levothyroxine/Metformin), so the same
+            // drug never looks different between the two lists.
             'rx_orders' => [
-                ['medicine' => 'Amoxicillin 500mg Capsules', 'quantity' => '21 capsule', 'date_requested' => '20 Sep 2026', 'status' => 'Issued'],
-                ['medicine' => 'Atorvastatin 20mg Tablets', 'quantity' => '28 tablet', 'date_requested' => '12 Sep 2026', 'status' => 'Requested'],
-                ['medicine' => 'Salbutamol Inhaler 100mcg', 'quantity' => '1 inhaler', 'date_requested' => '30 Aug 2026', 'status' => 'Rejected'],
+                ['medicine' => 'Amoxicillin 500mg Capsules', 'quantity' => '21 capsule', 'date_requested' => '20 Sep 2026', 'status' => 'Issued', 'icon' => '/assets/app/images/pill1.svg'],
+                ['medicine' => 'Atorvastatin 20mg Tablets', 'quantity' => '28 tablet', 'date_requested' => '12 Sep 2026', 'status' => 'Requested', 'icon' => '/assets/app/images/pill3.svg'],
+                ['medicine' => 'Salbutamol Inhaler 100mcg', 'quantity' => '1 inhaler', 'date_requested' => '30 Aug 2026', 'status' => 'Rejected', 'icon' => '/assets/app/images/pill5.svg'],
             ],
             'repeat_meds' => [
-                ['id' => 1, 'medicine' => 'Metformin 500mg Tablets (56)', 'last_issue' => '28 Aug 2026', 'dose' => '1 tablet, twice daily', 'status' => null, 'reminder_times' => ['08:00', '20:00'], 'days_to_go' => '6 days to go'],
-                ['id' => 2, 'medicine' => 'Atorvastatin 20mg Tablets (28)', 'last_issue' => '02 Sep 2026', 'dose' => '1 tablet at night', 'status' => 'Requested 12 Sep 2026', 'reminder_times' => null],
-                ['id' => 3, 'medicine' => 'Ramipril 5mg Capsules (28)', 'last_issue' => '15 Aug 2026', 'dose' => '1 capsule each morning', 'status' => null, 'reminder_times' => null],
-                ['id' => 4, 'medicine' => 'Levothyroxine 100mcg Tablets (28)', 'last_issue' => '09 Sep 2026', 'dose' => '1 tablet each morning', 'status' => null, 'reminder_times' => ['07:00'], 'days_to_go' => '15 days to go'],
+                ['id' => 1, 'medicine' => 'Metformin 500mg Tablets (56)', 'last_issue' => '28 Aug 2026', 'dose' => '1 tablet, twice daily', 'status' => null, 'reminder_times' => ['08:00', '20:00'], 'days_to_go' => '6 days to go', 'icon' => '/assets/app/images/pill4.svg'],
+                ['id' => 2, 'medicine' => 'Atorvastatin 20mg Tablets (28)', 'last_issue' => '02 Sep 2026', 'dose' => '1 tablet at night', 'status' => 'Requested 12 Sep 2026', 'reminder_times' => null, 'icon' => '/assets/app/images/pill3.svg'],
+                ['id' => 3, 'medicine' => 'Ramipril 5mg Capsules (28)', 'last_issue' => '15 Aug 2026', 'dose' => '1 capsule each morning', 'status' => null, 'reminder_times' => null, 'icon' => '/assets/app/images/pill5.svg'],
+                ['id' => 4, 'medicine' => 'Levothyroxine 100mcg Tablets (28)', 'last_issue' => '09 Sep 2026', 'dose' => '1 tablet each morning', 'status' => null, 'reminder_times' => ['07:00'], 'days_to_go' => '15 days to go', 'icon' => '/assets/app/images/pill2.svg'],
             ],
         ];
     }

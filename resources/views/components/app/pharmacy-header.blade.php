@@ -16,7 +16,6 @@
         <div class="py-[5px] flex items-center">
             {!! $icon('pharmacy.svg', 20, 20) !!}
             <span class="ml-[10px] min-w-0">{{ $pharmacy['name'] }}</span>
-            <button type="button" data-open="#changePharmacyPopup" class="ml-[5px] {{ $chip }}">Change Pharmacy</button>
         </div>
         <div class="py-[10px] flex items-start">
             {!! $icon('phone_call_icon.svg', 20, 20) !!}
@@ -60,4 +59,3 @@
     </div>
 </div>
 
-@include('app.partials.change-pharmacy-popup')
